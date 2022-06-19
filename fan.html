@@ -79,12 +79,26 @@
         margin: 10px auto 0px auto;
       }
     </style>
-  </head>
+    <script>
+      $(document).ready(function () {
+        alert('다 로딩됐다!');
+        $.ajax({
+          type: 'GET',
+          url: 'http://spartacodingclub.shop/sparta_api/weather/seoul',
+          data: {},
+          success: function (response) {
+            let temp = response['temp'];
+            $('#current-temp').text(temp);
+          },
+        });
+      });
+    </script>
+  </head> 
 
   <body>
     <div class="mytitle">
       <h1>99cm 신규 앨범 방명록</h1>
-      <!-- <button>영화 기록하기</button> -->
+      <p>현재 기온 : <span id="current-temp"></span></p>
     </div>
     <div class="mypost">
       <div class="form-floating mb-3">
