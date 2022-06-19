@@ -86,6 +86,7 @@
         margin: 20px auto 0px auto;
         padding: 20px;
         box-shadow: 0px 0px 3px 0px gray;
+        display: none;
       }
 
       .mybtns {
@@ -100,19 +101,27 @@
         margin-right: 10px;
       }
     </style>
+    <script>
+      function open_box() {
+        $('#post-box').show();
+      }
+      function close_box() {
+        $('#post-box').hide();
+      }
+    </script>
   </head>
 
   <body>
     <div class="mytitle">
       <h1>내 생애 최고의 영화들</h1>
-      <button>영화 기록하기</button>
+      <button onclick="open_box()">영화 기록하기</button>
     </div>
-    <div class="mypost">
+    <div class="mypost" id="post-box">
       <div class="form-floating mb-3">
         <input
           type="email"
           class="form-control"
-          id="floatingInput"
+          id="url"
           placeholder="name@example.com"
         />
         <label for="floatingInput">영화URL</label>
@@ -139,11 +148,17 @@
       </div>
       <div class="mybtns">
         <button type="button" class="btn btn-dark">기록하기</button>
-        <button type="button" class="btn btn-outline-dark">닫기</button>
+        <button
+          onclick="close_box()"
+          type="button"
+          class="btn btn-outline-dark"
+        >
+          닫기
+        </button>
       </div>
     </div>
     <div class="mycards">
-      <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div id="cards-box" class="row row-cols-1 row-cols-md-4 g-4">
         <div class="col">
           <div class="card h-100">
             <img
