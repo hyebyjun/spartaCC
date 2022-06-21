@@ -17,10 +17,13 @@ def home():
 
 @app.route("/movie", methods=["POST"])
 def movie_post():
+
+    # 유저가 입력한 영화기록정보들
     url_receive = request.form['url_give']
     star_receive = request.form['star_give']
     comment_receive = request.form['comment_give']
 
+    # 유저가 입력한 url을 토대로 크롤링해온 meta 정보들
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
@@ -30,6 +33,7 @@ def movie_post():
     image = soup.select_one('meta[property="og:image"]')['content']
     desc = soup.select_one('meta[property="og:description"]')['content']
 
+    # 위 두 종류 종합해서 DB 저장
     doc = {
         'title': title,
         'image': image,
@@ -43,7 +47,8 @@ def movie_post():
 
 @app.route("/movie", methods=["GET"])
 def movie_get():
-    return jsonify({'msg': 'GET 연결 완료!'})
+    movie_list = list(db.movies.find({}, {'_id': False}))
+    return jsonify({'movies': movie_list})
 
 
 if __name__ == '__main__':
