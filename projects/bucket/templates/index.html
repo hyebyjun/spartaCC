@@ -78,6 +78,7 @@
       }
       .mybox > li > h2.done {
         text-decoration: line-through;
+        color: grey;
       }
     </style>
     <script>
@@ -108,13 +109,13 @@
                     완료!
                   </button>
                 </li>
-                `
+                `;
               } else {
                 temp_html = `
                 <li>
-                  <h2 class="done">${bucket}/h2>
+                  <h2 class="done">${bucket}</h2>
                 </li>
-                `
+                `;
               }
               $('#bucket-list').append(temp_html);
             }
@@ -137,9 +138,10 @@
         $.ajax({
           type: 'POST',
           url: '/bucket/done',
-          data: { sameple_give: '데이터전송' },
+          data: { num_give: num },
           success: function (response) {
             alert(response['msg']);
+            window.location.reload();
           },
         });
       }

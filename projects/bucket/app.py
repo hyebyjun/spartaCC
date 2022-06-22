@@ -30,8 +30,8 @@ def bucket_post():
 
 @app.route("/bucket/done", methods=["POST"])
 def bucket_done():
-    sample_receive = request.form['sample_give']
-    print(sample_receive)
+    num_receive = request.form['num_give']
+    db.buckets.update_one({'num': int(num_receive)}, {'$set': {'done': True}})
     return jsonify({'msg': 'POST(완료) 연결 완료!'})
 
 
