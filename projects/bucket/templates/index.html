@@ -66,7 +66,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        margin-bottom: 10px;
+        /* margin-bottom: 10px; */
         min-height: 48px;
       }
       .mybox > li > h2 {
@@ -90,17 +90,46 @@
           url: '/bucket',
           data: {},
           success: function (response) {
-            alert(response['msg']);
+            let rows = response['buckets'];
+            for (let i = 0; i < rows.length; i++) {
+              let bucket = rows[i]['bucket'];
+              let num = rows[i]['num'];
+              let done = rows[i]['done'];
+              let temp_html = ``;
+              if (done == false) {
+                temp_html = `
+                <li>
+                  <h2>${bucket}</h2>
+                  <button
+                    onclick="done_bucket(${num})"
+                    type="button"
+                    class="btn btn-outline-primary"
+                  >
+                    완료!
+                  </button>
+                </li>
+                `
+              } else {
+                temp_html = `
+                <li>
+                  <h2 class="done">${bucket}/h2>
+                </li>
+                `
+              }
+              $('#bucket-list').append(temp_html);
+            }
           },
         });
       }
       function save_bucket() {
+        let bucket = $('#bucket').val();
         $.ajax({
           type: 'POST',
           url: '/bucket',
-          data: { sameple_give: '데이터전송' },
+          data: { bucket_give: bucket },
           success: function (response) {
             alert(response['msg']);
+            window.location.reload();
           },
         });
       }
@@ -137,24 +166,6 @@
         </button>
       </div>
     </div>
-    <div class="mybox" id="bucket-list">
-      <li>
-        <h2>✅ 호주에서 스카이다이빙 하기</h2>
-        <button
-          onclick="done_bucket(5)"
-          type="button"
-          class="btn btn-outline-primary"
-        >
-          완료!
-        </button>
-      </li>
-      <li>
-        <h2 class="done">✅ 호주에서 스카이다이빙 하기</h2>
-      </li>
-      <li>
-        <h2>✅ 호주에서 스카이다이빙 하기</h2>
-        <button type="button" class="btn btn-outline-primary">완료!</button>
-      </li>
-    </div>
+    <div class="mybox" id="bucket-list"></div>
   </body>
 </html>

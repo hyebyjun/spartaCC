@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, jsonify
+from pymongo import MongoClient
+from sympy import false
 
 app = Flask(__name__)
+client = MongoClient(
+    'mongodb+srv://test:sparta@cluster0.rf8ug.mongodb.net/?retryWrites=true&w=majority')
+db = client.dbsparta
 
 
 @app.route('/')
@@ -10,8 +15,16 @@ def home():
 
 @app.route("/bucket", methods=["POST"])
 def bucket_post():
-    sample_receive = request.form['sample_give']
-    print(sample_receive)
+    bucket_receive = request.form['bucket_give']
+
+    bucket_list = list(db.buckets.find({}, {'_id': False}))
+    count = len(bucket_list) + 1
+    doc = {
+        'num': count,
+        'bucket': bucket_receive,
+        'done': False
+    }
+    db.buckets.insert_one(doc)
     return jsonify({'msg': 'POST(기록) 연결 완료!'})
 
 
@@ -24,7 +37,8 @@ def bucket_done():
 
 @app.route("/bucket", methods=["GET"])
 def bucket_get():
-    return jsonify({'msg': 'GET 연결 완료!'})
+    bucket_list = list(db.buckets.find({}, {'_id': False}))
+    return jsonify({'buckets': bucket_list})
 
 
 if __name__ == '__main__':
