@@ -6,6 +6,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <meta property="og:title" content="hyexjun visitors LOG" />
+    <meta property="og:description" content="응원 남기도록 해" />
+    <meta property="og:image" content="../static/mio.jpg" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,7 +21,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <title>방명록</title>
+    <title>hello stranger</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
       rel="stylesheet"
@@ -27,6 +30,7 @@
       * {
         font-family: 'Gowun Dodum', sans-serif;
       }
+
       .mytitle {
         width: 100%;
         height: 250px;
@@ -35,7 +39,7 @@
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
           ),
-          url('https://pbs.twimg.com/media/FOTb7RCaAAI4fbo?format=jpg&name=large');
+          url('../static/mio.jpg');
         background-position: center;
         background-size: cover;
         color: white;
@@ -44,11 +48,13 @@
         align-items: center;
         justify-content: center;
       }
+
       .mycards {
         margin: 20px auto 20px auto;
         width: 95%;
         max-width: 1200px;
       }
+
       .mypost {
         width: 95%;
         max-width: 500px;
@@ -56,6 +62,7 @@
         padding: 20px;
         box-shadow: 0px 0px 3px 0px gray;
       }
+
       .mybtns {
         display: flex;
         flex-direction: row;
@@ -63,14 +70,17 @@
         justify-content: center;
         margin-top: 20px;
       }
+
       .mybtns > button {
         margin-right: 10px;
       }
+
       .myquote {
         width: 95%;
         max-width: 500px;
-        margin: 0px auto 10px auto;
+        margin: 0px auto 20px auto;
       }
+
       .myquote .card {
         margin: 10px auto 0px auto;
       }
@@ -136,8 +146,8 @@
 
   <body>
     <div class="mytitle">
-      <h1>(G)I-DLE 팬명록</h1>
-      <p>현재 기온 : <span id="current-temp"></span> ℃</p>
+      <h1>hyexjun visitors LOG</h1>
+      <p>Current Seoul: <span id="current-temp"></span> ℃</p>
     </div>
     <div class="mypost">
       <div class="form-floating mb-3">
