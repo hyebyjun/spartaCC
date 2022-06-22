@@ -17,7 +17,6 @@ def home():
 
 @app.route("/movie", methods=["POST"])
 def movie_post():
-
     # 유저가 입력한 영화기록정보들
     url_receive = request.form['url_give']
     star_receive = request.form['star_give']
