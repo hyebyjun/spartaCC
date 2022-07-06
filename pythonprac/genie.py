@@ -7,11 +7,16 @@ data = requests.get(
     'https://www.genie.co.kr/chart/top200?ditc=M&rtm=N&ymd=20210701', headers=headers)
 soup = BeautifulSoup(data.text, 'html.parser')
 
-songs = soup.select('tbody > tr.list')
+# songs = soup.select('tbody > tr.list')
+songs = soup.select('tr > td.info')
 # print(songs)
 
+num = 0
 for song in songs:
-    rank = song.select_one('td.number').text[0:2].strip()
-    title = song.select_one('a.title.ellipsis').text.strip()
+    num += 1
+    # rank = song.select_one('td.number').text[0:2].strip()
+    # title = song.select_one('a.title.ellipsis').text.strip()
+    title = song.select_one('a.title.ellipsis').text.strip().lstrip('19금').strip()
     artist = song.select_one('a.artist.ellipsis').text.strip()
-    print(rank, ".", title, "-", artist)
+    print(num, ".", title, "-", artist)
+

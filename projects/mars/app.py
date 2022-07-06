@@ -17,10 +17,12 @@ def web_mars_post():
     name_receive = request.form['name_give']
     address_receive = request.form['address_give']
     size_receive = request.form['size_give']
+    price_receive = request.form['price_give']
     doc = {
         'name': name_receive,
         'address': address_receive,
-        'size': size_receive
+        'size': size_receive,
+        'price': price_receive
     }
     db.mars.insert_one(doc)
     return jsonify({'msg': '주문 완료!'})
