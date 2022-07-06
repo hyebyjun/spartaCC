@@ -100,20 +100,24 @@
         let size = $('#size').val();
         let price = size * 500;
 
-        $.ajax({
-          type: 'POST',
-          url: '/mars',
-          data: {
-            name_give: name,
-            address_give: address,
-            size_give: size,
-            price_give: price,
-          },
-          success: function (response) {
-            alert(response['msg']);
-            window.location.reload();
-          },
-        });
+        if (name === '' || address === '' || size === '') {
+          alert('옵션을 확인해주세요.');
+        } else {
+          $.ajax({
+            type: 'POST',
+            url: '/mars',
+            data: {
+              name_give: name,
+              address_give: address,
+              size_give: size,
+              price_give: price,
+            },
+            success: function (response) {
+              alert(response['msg']);
+              window.location.reload();
+            },
+          });
+        }
       }
     </script>
   </head>
@@ -138,7 +142,7 @@
         <div class="input-group mb-3">
           <label class="input-group-text" for="size">평수</label>
           <select class="form-select" id="size">
-            <option selected>-- 주문 평수 --</option>
+            <option selected value="">-- 주문 평수 --</option>
             <option value="10">10평</option>
             <option value="20">20평</option>
             <option value="30">30평</option>
