@@ -100,7 +100,7 @@
         let size = $('#size').val();
         let price = size * 500;
 
-        if ((name || address || size) === '') {
+        if (name === '' || address === '' || size === '') {
           alert('옵션을 확인해주세요.');
         } else {
           $.ajax({
