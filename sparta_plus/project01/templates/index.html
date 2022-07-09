@@ -30,6 +30,9 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- file upload -->
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -58,9 +61,13 @@
       .container {
         padding-left: 50px;
       }
+      .posting-box > .custom-file {
+        margin-bottom: 18px;
+      }
     </style>
     <script>
       $(document).ready(function () {
+        bsCustomFileInput.init();
         listing();
       });
       function listing() {
@@ -75,10 +82,11 @@
             for (let i = 0; i < diaries.length; i++) {
               let title = diaries[i]['title'];
               let content = diaries[i]['content'];
+              let file = diaries[i]['file'];
 
               let temp_html = `
               <div class="card">
-                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <img class="card-img-top" src="../static/${file}" alt="${title}">
                 <div class="card-body">
                   <h5 class="card-title">${title}</h5>
                   <p class="card-text">${content}</p>
@@ -95,10 +103,20 @@
         let title = $('#title').val();
         let content = $('#content').val();
 
+        let file = $('#file')[0].files[0];
+        let form_data = new FormData();
+
+        form_data.append('file_give', file);
+        form_data.append('title_give', title);
+        form_data.append('content_give', content);
+
         $.ajax({
           type: 'POST',
           url: '/diary',
-          data: { title_give: title, content_give: content },
+          data: form_data,
+          cache: false,
+          contentType: false,
+          processData: false,
           success: function (response) {
             alert(response['msg']);
             window.location.reload();
@@ -114,6 +132,10 @@
         <div class="container">
           <h1>나홀로 일기장</h1>
           <div class="posting-box">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="file" />
+              <label class="custom-file-label" for="file">사진 고르기</label>
+            </div>
             <div class="form-group">
               <input
                 type="email"

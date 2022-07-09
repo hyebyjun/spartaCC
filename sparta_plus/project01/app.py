@@ -1,7 +1,9 @@
+from fileinput import filename
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 import requests
 from flask import Flask, render_template, jsonify, request
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -25,10 +27,22 @@ def show_diary():
 def save_diary():
     title_receive = request.form['title_give']
     content_receive = request.form['content_give']
+    file = request.files["file_give"]
+
+    extension = file.filename.split('.')[-1] # 저장된 파일이름에서 확장자명 따오기
+
+    # 파일 저장 시에 파일이름을 저장시각으로 정해주기
+    today = datetime.now()
+    mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+    filename = f'file-{mytime}'
+
+    save_to = f'static/{filename}.{extension}'
+    file.save(save_to)
 
     doc = {
         'title': title_receive,
-        'content': content_receive
+        'content': content_receive,
+        'file': f'{filename}.{extension}'
     }
     db.diary.insert_one(doc)
     return jsonify({'msg': '저장 완료!'})
