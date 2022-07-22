@@ -1,14 +1,13 @@
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+from pymongo import MongoClient
 
 app = Flask(__name__)
-
-from pymongo import MongoClient
 
 client = MongoClient(
     'mongodb+srv://test:sparta@cluster0.rf8ug.mongodb.net/?retryWrites=true&w=majority')
 # db = client.dbsparta
 # client = MongoClient('mongodb://3.34.44.93', 27017, username="sparta", password="woowa")
-db = client.dbsparta_plus_week4
+db = client.dbsparta_plus
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
 # 이 문자열은 서버만 알고있기 때문에, 내 서버에서만 토큰을 인코딩(=만들기)/디코딩(=풀기) 할 수 있습니다.
@@ -93,7 +92,8 @@ def api_login():
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         # token을 줍니다.
         return jsonify({'result': 'success', 'token': token})

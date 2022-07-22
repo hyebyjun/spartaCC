@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../mogakcogo/.idea/mogakcogo.iml" filepath="$PROJECT_DIR$/../../mogakcogo/.idea/mogakcogo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sparta_plus.iml" filepath="$PROJECT_DIR$/.idea/sparta_plus.iml" />
     </modules>
   </component>
