@@ -1,16 +1,5 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
-
-const BucketList = (props) => {
-  const my_lists = props.list;
-
-  return (
-    <ListStyle>
-      {my_lists.map((list, index) => {
-        return <ItemStyle key={index}>{list}</ItemStyle>;
-      })}
-    </ListStyle>
-  );
-};
 
 const ListStyle = styled.div`
   display: flex;
@@ -25,5 +14,21 @@ const ItemStyle = styled.div`
   margin: 8px;
   background-color: aliceblue;
 `;
+
+const BucketList = (props) => {
+  const my_lists = props.list;
+  const my_wrap = useRef(null);
+
+  console.log(my_wrap);
+  return (
+    <ListStyle>
+      <div ref={my_wrap}>
+        {my_lists.map((list, index) => {
+          return <ItemStyle key={index}>{list}</ItemStyle>;
+        })}
+      </div>
+    </ListStyle>
+  );
+};
 
 export default BucketList;
