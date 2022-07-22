@@ -1,26 +1,26 @@
 import React from 'react';
 import BucketList from './BucketList';
-import styled from 'styled-components';
+import './style.css';
 
-const Container = styled.div`
-  max-width: 350px;
-  min-height: 80vh;
-  background-color: #fff;
-  padding: 16px;
-  margin: 20px auto;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-`;
+// .container {
+//   background-color: #fff;
+//   width: 50vw;
+//   max-width: 350px;
+//   margin: auto;
+//   height: 80vh;
+//   padding: 16px;
+//   border: 1px solid #ddd;
+//   border-radius: 5px;
+// }
 
-const Title = styled.h1`
-  color: slateblue;
-  text-align: center;
-`;
+// .container > h1 {
+//   color: slateblue;
+//   text-align: center;
+// }
 
-const Line = styled.hr`
-  margin: 16px 0px;
-  border: 1px dotted #ddd;
-`;
+// .container > .line {
+//   margin: 16px 0px;
+// }
 
 class App extends React.Component {
   constructor(props) {
@@ -33,13 +33,13 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <Container>
-          <Title>내 버킷리스트</Title>
-          <Line />
+        <div className='container'>
+          <h1>내 버킷리스트</h1>
+          <hr className='line' />
           {/* 컴포넌트를 넣어줍니다. */}
           {/* <컴포넌트 명 [props 명]={넘겨줄 것(리스트, 문자열, 숫자, ...)}/> */}
           <BucketList list={this.state.list} />
-        </Container>
+        </div>
       </div>
     );
   }
