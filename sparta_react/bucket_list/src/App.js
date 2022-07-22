@@ -1,37 +1,49 @@
 import React from 'react';
-import './App.css';
 import BucketList from './BucketList';
-// import { BucketList } from './BucketList';
+import './App.css';
+import './style.css';
+import styled from 'styled-components';
 
-// function App() {
-//   return (
-//     <div className='App'>
-//       <BucketList />
-//     </div>
-//   );
-// }
-
-// 클래스형 컴포넌트는 이렇게 생겼습니다!
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // App 컴포넌트의 state를 정의해줍니다.
+    // App 컴포넌트의 state를 정의
     this.state = {
       list: ['영화관 가기', '매일 책읽기', '수영 배우기'],
     };
   }
 
-  // 랜더 함수 안에 리액트 엘리먼트를 넣어줍니다!
   render() {
     console.log(this.state.list);
     return (
       <div className='App'>
-        <h1>내 버킷리스트</h1>
-        {/* 컴포넌트를 넣어줍니다. */}
-        <BucketList list={this.state.list}/>
+        <MyStyled bg_color={'red'} />
+        <MyStyled>
+          <p>im here!</p>
+        </MyStyled>
+        <div className='container'>
+          <h1>내 버킷리스트</h1>
+          <div className='line'>
+            <BucketList list={this.state.list} />
+          </div>
+        </div>
       </div>
     );
   }
 }
+
+const MyStyled = styled.div`
+  width: 50vw;
+  height: 150px;
+  /* background: purple; */
+  background-color: ${(props) => (props.bg_color ? 'red' : 'purple')};
+  p {
+    color: white;
+  }
+  &:hover {
+    // MyStyled 나 자신 == & 로 표기 가능
+    background-color: gray;
+  }
+`;
 
 export default App;
