@@ -1,9 +1,14 @@
+import Form from '../form/Form';
+
 const Header = () => {
   return (
-    <div>
-
-    </div>
-  )
-}
+    <>
+      <div>
+        <p>My Todo List</p>
+        <p>React</p>
+      </div>
+    </>
+  );
+};
 
 export default Header;

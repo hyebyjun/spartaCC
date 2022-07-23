@@ -1,25 +1,28 @@
+import { useRef } from 'react';
+import { useState } from 'react';
+import Form from './components/form/Form';
+import TodoList from './pages/TodoList';
+
 function App() {
+  const [data, setData] = useState([]);
+  const dataId = useRef(1);
+
+  const onCreate = (title, content) => {
+    const newItem = {
+      title,
+      content,
+      id: dataId.current,
+    };
+    dataId.current += 1;
+    setData([newItem, ...data]);
+  };
+  console.log(data);
+
   return (
-    <div>
-      <div className='working'>
-        <h2>Working...</h2>
-        <div id='card'>
-          <h3>리액트 공부하기</h3>
-          <p>리액트 기초를 공부해봅시다.</p>
-          <button>삭제하기</button>
-          <button>완료</button>
-        </div>
-      </div>
-      <div className='done'>
-        <h2>Done..!</h2>
-        <div id='card'>
-          <h3>리액트 공부하기</h3>
-          <p>리액트 기초를 공부해봅시다.</p>
-          <button>삭제하기</button>
-          <button>완료</button>
-        </div>
-      </div>
-    </div>
+    <>
+      {/* <Form onCreate={onCreate} /> */}
+      <TodoList onCreate={onCreate} />
+    </>
   );
 }
 
